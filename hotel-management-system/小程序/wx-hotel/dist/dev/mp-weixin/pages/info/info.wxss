@@ -1,0 +1,11 @@
+
+.btns {
+		margin-top: 60px;
+		width: 100%;
+		background: #FFFFFF;
+		height: 120rpx;
+}
+.bts {
+		width: 90%;
+		background-color: #009688 !important;
+}

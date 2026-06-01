@@ -1,0 +1,17 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.itmk.wxapi.hotel_order.mapper.HotelOrderMapper">
+    <select id="getOrderList" resultType="com.itmk.wxapi.hotel_order.entity.OrderVo">
+        select o.*,rm.info_id,hif.img_url,hif.info_name from hotel_order as o
+        inner join hotel_room as rm on FIND_IN_SET(rm.room_id,o.room_id)
+        inner join hotel_info as hif on hif.info_id = rm.info_id
+        where o.openid =#{parm.openid}
+         <if test="parm.type != null and parm.type !=''">
+            and o.status =#{parm.type}
+        </if>
+        GROUP BY o.order_id,o.room_id,o.room_code,o.status
+        order by o.book_time desc
+    </select>
+</mapper>

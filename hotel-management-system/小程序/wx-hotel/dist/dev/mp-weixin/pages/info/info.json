@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "预订信息",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "u-divider": "../../uni_modules/vk-uview-ui/components/u-divider/u-divider",
+    "u-input": "../../uni_modules/vk-uview-ui/components/u-input/u-input",
+    "u-form-item": "../../uni_modules/vk-uview-ui/components/u-form-item/u-form-item",
+    "uni-datetime-picker": "../../uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker",
+    "u-form": "../../uni_modules/vk-uview-ui/components/u-form/u-form"
+  }
+}

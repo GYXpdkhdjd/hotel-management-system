@@ -1,0 +1,1 @@
+<view wx:if="{{a}}" class="{{[h, i, j, k, 'u-tag', 'data-v-5f3856dc']}}" style="{{l}}" bindtap="{{m}}">{{b}} <view class="u-icon-wrap data-v-5f3856dc" catchtap="{{g}}"><u-icon wx:if="{{c}}" bindclick="{{d}}" class="u-close-icon data-v-5f3856dc" style="{{e}}" u-i="5f3856dc-0" bind:__l="__l" u-p="{{f}}"></u-icon></view></view>

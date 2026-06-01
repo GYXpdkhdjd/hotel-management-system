@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "u-divider": "../../uni_modules/vk-uview-ui/components/u-divider/u-divider"
+  }
+}
