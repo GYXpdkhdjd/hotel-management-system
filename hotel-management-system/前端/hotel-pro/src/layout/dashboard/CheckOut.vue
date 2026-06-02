@@ -57,8 +57,8 @@
         </el-row>
         <el-row>
           <el-col :span="12" :offset="0">
-            <el-form-item prop="price" label="金额">
-              <el-input type="number" v-model="addModel.price"></el-input>
+            <el-form-item prop="price" label="应付金额">
+              <el-input type="number" v-model="addModel.price" placeholder="可修改应付金额"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -101,7 +101,14 @@ const show = async (roomId: string) => {
   let res = await getInfoByIdApi(roomId);
   if (res && res.code == 200) {
     console.log(res.data);
-    Object.assign(addModel, res.data);
+    // 绑定订单信息到表单
+    if (res.data.order) {
+      Object.assign(addModel, res.data.order);
+    }
+    // 设置默认应付金额为房间价格
+    if (res.data.infoPrice) {
+      addModel.price = res.data.infoPrice;
+    }
   }
 };
 //暴露出去

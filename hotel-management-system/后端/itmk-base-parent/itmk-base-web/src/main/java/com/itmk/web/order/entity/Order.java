@@ -9,10 +9,7 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.util.Date;
 
-/**
- * @Author java实战基地
- * @Version 2383404558
- */
+
 @Data
 @TableName("into_order")
 public class Order {

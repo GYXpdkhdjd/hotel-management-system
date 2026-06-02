@@ -3,6 +3,8 @@ package com.itmk.web.home.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.itmk.utils.ResultUtils;
 import com.itmk.utils.ResultVo;
+import com.itmk.web.hotel_info.entity.HotelInfo;
+import com.itmk.web.hotel_info.service.HotelInfoService;
 import com.itmk.web.hotle_room.entity.DeskRoom;
 import com.itmk.web.hotle_room.entity.HotelRoom;
 import com.itmk.web.hotle_room.entity.RoomParm;
@@ -13,12 +15,11 @@ import com.itmk.web.order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-/**
- * @Author java实战基地
- * @Version 2383404558
- */
+
 @RestController
 @RequestMapping("/api/home")
 public class HomeController {
@@ -26,6 +27,8 @@ public class HomeController {
     private HotleRoomService hotleRoomService;
     @Autowired
     private OrderService orderService;
+    @Autowired
+    private HotelInfoService hotelInfoService;
     //查询房间列表
     @GetMapping("/getHomeList")
     public ResultVo getHomeList(RoomParm parm){
@@ -50,11 +53,24 @@ public class HomeController {
     //根据客房id查询信息
     @GetMapping("/getInfoById")
     public ResultVo getInfoById(Long roomId){
+       // 查询入住订单
        Order order = orderService.getOne(new LambdaQueryWrapper<Order>()
         .eq(Order::getRoomId,roomId)
         .eq(Order::getStatus,"1")
-        );
-       return ResultUtils.success("查询成功",order);
+       );
+       // 查询房间类型价格作为默认应付金额
+       Map<String, Object> result = new HashMap<>();
+       result.put("order", order);
+       if (order != null) {
+           HotelRoom room = hotleRoomService.getById(roomId);
+           if (room != null) {
+               HotelInfo hotelInfo = hotelInfoService.getById(room.getInfoId());
+               if (hotelInfo != null) {
+                   result.put("infoPrice", hotelInfo.getInfoPrice());
+               }
+           }
+       }
+       return ResultUtils.success("查询成功", result);
     }
 
     //退房
